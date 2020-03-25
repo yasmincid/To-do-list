@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SpinerProject</string>
+    <string name="tview1">TO DO LIST</string>
+    <string name="Title">Task</string>
+    <string name="Description">Description</string>
+    <string name="Check">Resolve</string>
+    <string name="add">Resolve</string>
+    <string name="tasktitle">Task title</string>
+    <string name="addBT">Add Task</string>
+    <string name="addBack">Back</string>
+    <string name="titleNewTask">Title</string>
+    <string name="descNewTask">Description</string>
+    <string name="dateTask">Date</string>
+    <string name="timeTask">Time</string>
+    <string name="newTask">New Task</string>
+</resources>
