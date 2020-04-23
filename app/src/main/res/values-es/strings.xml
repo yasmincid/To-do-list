@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lista de tareas</string>
+    <string name="tview1">Lista de tareas</string>
+    <string name="Title">Tarea</string>
+    <string name="Description">Descripción</string>
+    <string name="Check">Resuelto</string>
+    <string name="add">Resuelto</string>
+    <string name="tasktitle">Titulo de la tarea</string>
+    <string name="addBT">Agregar tarea</string>
+    <string name="addBack">Atrás</string>
+    <string name="titleNewTask">Titulo</string>
+    <string name="descNewTask">Descripción</string>
+    <string name="dateTask">Fecha</string>
+    <string name="timeTask">Hora</string>
+    <string name="newTask">Nueva tarea</string>
+    <string name="findTask">Buscar tarea</string>
+    <string name="setting">Ajustes</string>
+    <string name="tvMyTask">Mis Tareas</string>
+    <string name="find">Buscar tarea</string>
+    <string name="share">Compartir</string>
+</resources>

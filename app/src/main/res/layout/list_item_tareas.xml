@@ -1,35 +1,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_height="wrap_content"
-              android:layout_width="match_parent"
-              android:gravity="center"
+              android:layout_width="400sp"
+              android:gravity="center_horizontal"
               android:orientation="vertical"
-              android:padding="10sp">
-
-
-    <LinearLayout
-            android:layout_margin="5sp"
+              android:padding="10sp" android:id="@+id/border" android:background="#ffffff"
+              android:hapticFeedbackEnabled="false"
+              android:baselineAlignedChildIndex="@android:integer/config_mediumAnimTime"
+              android:layout_centerHorizontal="true" android:layout_centerInParent="true"
+              android:layout_centerVertical="true" android:layout_gravity="center"
+              android:layout_margin="@dimen/material_emphasis_medium" android:outlineProvider="background">
+    <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="144dp"
-            android:background="#F57166"
-            android:orientation="vertical">
-        <TextView android:id="@+id/title"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent"
-                  android:pointerIcon="text"
-                  android:text="@string/Title"
-                  android:outlineProvider="background"
-                  android:textSize="30sp"
-                  android:padding="20sp"
-                  android:textColor="#ffffff"
-                  android:textStyle="bold"/>
+            android:layout_height="match_parent" android:id="@+id/ba" android:background="#ffffff">
 
-        <TextView android:id="@+id/descrip"
-                  android:text="@string/Description"
-                  android:textColor="#ffffff"
-                  android:textSize="24sp"
-                  android:layout_width="match_parent"
-                  android:layout_height="58dp"/>
-
-
-    </LinearLayout>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+            <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/check1" android:onClick="deleteTask"
+                    android:background="#ffffff" android:textColor="#ffffff" android:textColorHint="#ffffff"
+                    android:drawableTint="#ffffff"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="355dp"
+                    android:layout_height="wrap_content" android:id="@+id/title" android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"/>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"/>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"/>
+    </TableLayout>
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/description" android:textSize="14sp"
+            android:textColor="#090808"/>
 </LinearLayout>

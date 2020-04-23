@@ -2,27 +2,32 @@ package com.example.spinerproject
 
 import android.content.ContentValues
 import android.content.Intent
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import data.DataDbHelper
+import model.Task
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NewTask : AppCompatActivity() {
-    private var titleStr = ""
-    private var descriptionStr = ""
-    private var timeStr = ""
-    private var dateStr = ""
-    private var listBd: MutableList<Model> = ArrayList()
 
+    private var titleTv: TextView? = null
+    private var descriptionMl: TextView? = null
+    private var dateTv: TextView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
-
+        titleTv = findViewById<TextView>(R.id.titleNewTask)
+        descriptionMl = findViewById<TextView>(R.id.descripNewTask)
+        dateTv = findViewById<TextView>(R.id.dateNewTask)
 
     }
 
@@ -33,35 +38,52 @@ class NewTask : AppCompatActivity() {
     }
 
     fun addDatos(view: View) {
-        val myDataBase: DataDbHelper = DataDbHelper(this, "Tareas", null, 1)
+        val myDataBase = DataDbHelper(this, "TasksP", null, 1)
         val data: SQLiteDatabase = myDataBase.writableDatabase
-        var titleTv = findViewById<TextView>(R.id.titleNewTask)
-        var descriptionMl = findViewById<TextView>(R.id.descripNewTask)
-        var timeTv = findViewById<TextView>(R.id.timeNewTask)
-        var dateTv = findViewById<TextView>(R.id.dateNewTask)
-        timeStr = timeTv.text.toString()
-        titleStr = titleTv.text.toString()
-        descriptionStr = descriptionMl.text.toString()
-        dateStr = dateTv.text.toString()
-        if (titleStr.isNotEmpty() && descriptionStr.isNotEmpty() && dateStr.isNotEmpty() && timeStr.isNotEmpty()) {
-            var values: ContentValues = ContentValues()
-            values.put("Title", titleStr)
-            values.put("Description", descriptionStr)
-            values.put("Date", dateStr)
-            values.put("Time", timeStr)
-            data.insert("Tareas", null, values)
-            data.close()
-            titleTv.setText("")
-            descriptionMl.setText("")
-            dateTv.setText("")
-            timeTv.setText("")
-            Toast.makeText(this, "ADICIONADO", Toast.LENGTH_SHORT).show()
+        val titleStr = titleTv?.text.toString()
+        val descriptionStr = descriptionMl?.text.toString()
+        val date = dateTv?.text.toString()
+        val x = "select description, date from Task where title = " + titleStr.toString()
+        Log.d("hj", x)
+        if (titleStr.isNotEmpty() && descriptionStr.isNotEmpty() && date != null) {
+            var values = ContentValues()
 
+            values.put("title", titleStr)
+            values.put("description", descriptionStr)
+            values.put("date", date)
+            data.insert("Task", null, values)
+            data.close()
+            titleTv?.setText("")
+            descriptionMl?.setText("")
+            dateTv?.setText("")
+            Toast.makeText(this, "ADICIONADO", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Debe llenar todos los campos", Toast.LENGTH_SHORT).show()
         }
+    }
 
+    fun findTask(view: View) {
+        val myDatabase = DataDbHelper(this, "TasksP", null, 1)
+        val data: SQLiteDatabase = myDatabase.writableDatabase
+        val title: String = titleTv?.text.toString()
+        if (title.isNotEmpty()) {
+
+            var cursor: Cursor = data.rawQuery("select description, date from Task where title = '" + title + "'", null)
+            if (cursor.moveToFirst()) {
+                descriptionMl?.setText(cursor.getString(0))
+                dateTv?.setText(cursor.getString(1))
+                data.close()
+            } else {
+                Toast.makeText(this, "There is not a task with that title", Toast.LENGTH_SHORT).show()
+                data.close()
+            }
+
+        } else {
+            Toast.makeText(this, "you should introduce a title", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
+
 }
+
