@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpinerProject</string>
+    <string name="app_name">To Do List</string>
     <string name="tview1">TO DO LIST</string>
     <string name="Title">Task</string>
     <string name="Description">Description</string>
@@ -13,4 +13,11 @@
     <string name="dateTask">Date</string>
     <string name="timeTask">Time</string>
     <string name="newTask">New Task</string>
+    <string name="findTask">Find Task</string>
+    <string name="setting">Settings</string>
+    <string name="tvMyTask">My Tasks</string>
+    <string name="find">Find Task</string>
+    <string name="share">Share</string>
+
+
 </resources>
