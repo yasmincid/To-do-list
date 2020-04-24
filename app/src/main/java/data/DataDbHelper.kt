@@ -3,9 +3,6 @@ package data
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
-import model.Task
-import java.util.*
 
 class DataDbHelper(context: Context, namebd: String, factory: SQLiteDatabase.CursorFactory?, version: Int) :
     SQLiteOpenHelper(context, namebd, null, version) {
@@ -22,7 +19,6 @@ class DataDbHelper(context: Context, namebd: String, factory: SQLiteDatabase.Cur
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
 
 
 }

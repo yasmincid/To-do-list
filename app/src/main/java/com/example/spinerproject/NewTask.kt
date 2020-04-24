@@ -4,16 +4,13 @@ import android.content.ContentValues
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import data.DataDbHelper
-import model.Task
-import java.util.*
-import kotlin.collections.ArrayList
 
 class NewTask : AppCompatActivity() {
 
@@ -45,7 +42,7 @@ class NewTask : AppCompatActivity() {
         val date = dateTv?.text.toString()
         val x = "select description, date from Task where title = " + titleStr.toString()
         Log.d("hj", x)
-        if (titleStr.isNotEmpty() && descriptionStr.isNotEmpty() && date != null) {
+        if (titleStr.isNotEmpty() && descriptionStr.isNotEmpty()) {
             var values = ContentValues()
 
             values.put("title", titleStr)

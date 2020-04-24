@@ -1,17 +1,14 @@
 package com.example.spinerproject
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import data.DataDbHelper
 import model.Task
@@ -20,53 +17,26 @@ import model.Task
 class MainActivity : AppCompatActivity() {
 
     var listaux = mutableListOf<Task>()
-    var admin: DataDbHelper = DataDbHelper(this, "Tareas", null, 1)
-    //var tv1: TextView? = null
     var chek: CheckBox? = null
-    // var list: ListView? = null
     var selectedTask: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var tv1 = findViewById<TextView>(R.id.tv1)
         var list = findViewById<ListView>(R.id.lv1)
         listaux = llenarList()
         list.adapter = TaskListAdapter(this, R.layout.list_item_tareas, listaux)
 
         list.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             if (position == 0) {
-                val p = list.get(position)
-                Toast.makeText(this, "0", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, list.get(position).toString(), Toast.LENGTH_SHORT).show()
             }
             if (position == 1) {
-                Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, list.get(position).toString(), Toast.LENGTH_SHORT).show()
             }
         }
 
- //       showList()
-//        var list = findViewById<ListView>(R.id.lv1)
-//        listaux = llenarList()
-//        list.adapter = TaskListAdapter(this, R.layout.list_item_tareas, listaux)
-
     }
-
-//    fun showList() {
-//        listaux = llenarList()
-//        list?.adapter = TaskListAdapter(this, R.layout.list_item_tareas, listaux)
-//
-//        list?.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
-//            if (position == 0) {
-//                val p = list?.get(position)
-//                Toast.makeText(this, "0", Toast.LENGTH_SHORT).show()
-//            }
-//            if (position == 1) {
-//                Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//
-//
-//    }
 
     fun llenarList(): MutableList<Task> {
         val myDatabase = DataDbHelper(this, "TasksP", null, 1)
@@ -89,11 +59,6 @@ class MainActivity : AppCompatActivity() {
     //show and hide menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.taskmenu, menu)
-//        val searchManager= getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//        (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply{
-//            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-//
-//        }
         return true
     }
 
@@ -132,7 +97,8 @@ class MainActivity : AppCompatActivity() {
         var task: Task = Task("", "", "")
         if (title.isNotEmpty()) {
 
-            var cursor: Cursor = data.rawQuery("select description, date from Task where title = '" + title + "'", null)
+            var cursor: Cursor =
+                data.rawQuery("select description, date from Task where title = '" + title + "'", null)
             if (cursor.moveToFirst()) {
 
                 var description = cursor.getString(0)
@@ -162,7 +128,6 @@ class MainActivity : AppCompatActivity() {
         bd.close()
 
         if (cant == 1) {
-       //     showList()
             Toast.makeText(this, "The task was delete", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "The task doesn't exits" + titleStr, Toast.LENGTH_SHORT).show()

@@ -9,13 +9,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".FuntionsCalculateBrand">
+
+        <activity android:name="com.example.spinerproject.Settings">
         </activity>
-        <activity android:name=".Settings">
+        <activity android:name="com.example.spinerproject.NewTask">
         </activity>
-        <activity android:name=".NewTask">
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.spinerproject.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
