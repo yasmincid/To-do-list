@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import data.DataDbHelper
 import model.Task
 
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     var listaux = mutableListOf<Task>()
     var chek: CheckBox? = null
-    var selectedTask: TextView? = null
+    var selectedTask = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +26,11 @@ class MainActivity : AppCompatActivity() {
         listaux = llenarList()
         list.adapter = TaskListAdapter(this, R.layout.list_item_tareas, listaux)
 
-        list.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
-            if (position == 0) {
-                Toast.makeText(this, list.get(position).toString(), Toast.LENGTH_SHORT).show()
-            }
-            if (position == 1) {
-                Toast.makeText(this, list.get(position).toString(), Toast.LENGTH_SHORT).show()
-            }
+        list.setOnItemClickListener { parent, view, position, id ->
+            selectedTask = listaux.get(position).title
+            Toast.makeText(this, selectedTask, Toast.LENGTH_SHORT).show()
+
+
         }
 
     }
@@ -46,8 +43,7 @@ class MainActivity : AppCompatActivity() {
         if (registers.moveToFirst()) do {
             val title = registers.getString(1)
             val description = registers.getString(2)
-            val date = registers.getString(3)
-            val task = Task(title, description, date)
+            val task = Task(title, description)
             myList.add(task)
         } while (registers.moveToNext())
 
@@ -94,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     fun findTask(title: String): Task {
         val myDatabase = DataDbHelper(this, "TasksP", null, 1)
         val data: SQLiteDatabase = myDatabase.writableDatabase
-        var task: Task = Task("", "", "")
+        var task: Task = Task("", "")
         if (title.isNotEmpty()) {
 
             var cursor: Cursor =
@@ -103,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
                 var description = cursor.getString(0)
                 var date = cursor.getString(1)
-                task = Task(title, description, date)
+                task = Task(title, description)
                 data.close()
                 return task
             } else {
@@ -122,18 +118,20 @@ class MainActivity : AppCompatActivity() {
         val bd: SQLiteDatabase = admin.writableDatabase
 
         chek = findViewById<CheckBox>(R.id.check1)
-        selectedTask = findViewById(R.id.title)
-        val titleStr = selectedTask?.text.toString()
-        var cant = bd.delete("Task", "title= '" + titleStr + "'", null)
+        var cant = bd.delete("Task", "title= '" + selectedTask + "'", null)
         bd.close()
 
         if (cant == 1) {
             Toast.makeText(this, "The task was delete", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "The task doesn't exits" + titleStr, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "The task doesn't exits" + selectedTask, Toast.LENGTH_SHORT).show()
         }
 
+    }
 
+    fun add(view: View) {
+        val int: Intent = Intent(this, NewTask::class.java)
+        startActivity(int)
     }
 }
 

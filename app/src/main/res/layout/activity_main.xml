@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity" android:id="@+id/flottingAdd">
     <TextView
             android:text="@string/tview1"
             android:layout_width="171dp"
@@ -30,5 +30,15 @@
             android:layout_alignParentEnd="true" android:layout_above="@+id/newTask"
             android:layout_alignParentStart="true" android:layout_marginTop="87dp"
             android:layout_alignParentTop="true"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_add"
+            android:id="@+id/floatingActionButton" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginBottom="104dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.84"
+            android:onClick="add" app:backgroundTint="#009688"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

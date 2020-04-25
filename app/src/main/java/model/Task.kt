@@ -1,3 +1,7 @@
 package model
 
-class Task(val title: String, val desc: String, val date: String)
+import java.util.*
+
+class Task(val title: String, val desc: String) {
+    var date = Calendar.getInstance().time
+}
