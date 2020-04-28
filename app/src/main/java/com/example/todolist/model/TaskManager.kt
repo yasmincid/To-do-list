@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
 import com.example.todolist.data.DataDbHelper
 import java.util.*
 
@@ -14,8 +13,9 @@ class TaskManager(context: Context) {
     val mContext = context
     var admin = DataDbHelper(mContext, "TasksP", null, 1)
 
-    fun addTasks(title: TextView?, description: TextView?) {
+    fun addTasks(title: TextView?, description: TextView?): Boolean {
         var bd: SQLiteDatabase = admin.writableDatabase
+        var flag = false
         val titleStr = title?.text.toString()
         val descriptionStr = description?.text.toString()
         val date = Calendar.getInstance().time
@@ -26,12 +26,11 @@ class TaskManager(context: Context) {
             values.put("date", date.toString())
             bd.insert("Task", null, values)
             bd.close()
-            title?.setText("")
-            description?.setText("")
-            Toast.makeText(mContext, "ADICIONADO", Toast.LENGTH_SHORT).show()
+            flag = true
         } else {
-            Toast.makeText(mContext, "Debe llenar todos los campos", Toast.LENGTH_SHORT).show()
+            flag = false
         }
+        return flag
     }
 
     fun findTask(context: Context, title: TextView): Task {
@@ -48,25 +47,17 @@ class TaskManager(context: Context) {
                 bd.close()
                 return task
             } else {
-                Toast.makeText(context, "There is not a task with that title", Toast.LENGTH_SHORT).show()
                 bd.close()
             }
         }
         return task
-
     }
 
-    fun deleteTask(selected: String, chek: CheckBox) {
+    fun deleteTask(selected: String, chek: CheckBox): Int {
         var bd: SQLiteDatabase = admin.writableDatabase
         var cant = bd.delete("Task", "title= '" + selected + "'", null)
         bd.close()
-        if (cant == 1) {
-            chek.setText("")
-            Toast.makeText(mContext, "The task was delete", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(mContext, "The task doesn't exits" + selected, Toast.LENGTH_SHORT).show()
-        }
-
+        return cant
     }
 
     fun getAllTasks(): MutableList<Task> {

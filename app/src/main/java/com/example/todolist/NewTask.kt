@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todolist.model.TaskManager
 
@@ -12,7 +13,6 @@ class NewTask : AppCompatActivity() {
 
     private var titleTv: TextView? = null
     private var descriptionMl: TextView? = null
-    private var dateTv: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,13 @@ class NewTask : AppCompatActivity() {
         }
         if (id == R.id.save) {
             val taskManager = TaskManager(this)
-            taskManager.addTasks(titleTv, descriptionMl)
+            if (taskManager.addTasks(titleTv, descriptionMl) == true) {
+                titleTv?.setText("")
+                descriptionMl?.setText("")
+                Toast.makeText(this, "The task was add", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "You should introdoce all dates", Toast.LENGTH_SHORT).show()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

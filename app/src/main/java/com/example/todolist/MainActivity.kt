@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        fillList()
+    }
+
+    fun fillList() {
         var list = findViewById<ListView>(R.id.lvTask)
         listaux = taskManager.getAllTasks()
         list.adapter = TaskListAdapter(this, R.layout.list_item_tareas, listaux)
@@ -64,7 +68,12 @@ class MainActivity : AppCompatActivity() {
 
     fun deletedTask(view: View) {
         val chek = findViewById<CheckBox>(R.id.check1)
-        taskManager.deleteTask(selectedTask, chek)
+        val cantDel = taskManager.deleteTask(selectedTask, chek)
+        if (cantDel == 1) {
+            Toast.makeText(this, "The task was delete", Toast.LENGTH_SHORT).show()
+            chek.setText("")
+            fillList()
+        }
     }
 }
 
