@@ -17,21 +17,19 @@ class MainActivity : AppCompatActivity() {
 
     var listaux = mutableListOf<Task>()
     var selectedTask = ""
-    val taskManager = TaskManager()
+    var taskManager = TaskManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var list = findViewById<ListView>(R.id.lvTask)
-        listaux = taskManager.getAllTasks(this)
+        listaux = taskManager.getAllTasks()
         list.adapter = TaskListAdapter(this, R.layout.list_item_tareas, listaux)
         list.setOnItemClickListener { parent, view, position, id ->
             selectedTask = listaux.get(position).title
             Toast.makeText(this, selectedTask, Toast.LENGTH_SHORT).show()
         }
-
     }
-
 
     //show and hide menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         if (id == R.id.newTask) {
             val int: Intent = Intent(this, NewTask::class.java)
             startActivity(int)
-
         }
         if (id == R.id.share) {
             Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show()
@@ -67,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     fun deletedTask(view: View) {
         val chek = findViewById<CheckBox>(R.id.check1)
-        taskManager.deleteTask(this, selectedTask, chek)
+        taskManager.deleteTask(selectedTask, chek)
     }
 }
 

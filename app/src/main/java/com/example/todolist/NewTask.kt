@@ -14,22 +14,17 @@ class NewTask : AppCompatActivity() {
     private var descriptionMl: TextView? = null
     private var dateTv: TextView? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_task)
         titleTv = findViewById<TextView>(R.id.titleNewTask)
         descriptionMl = findViewById<TextView>(R.id.descripNewTask)
-
-
     }
 
     fun back() {
         val int: Intent = Intent(this, MainActivity::class.java)
         startActivity(int)
-
     }
-
 
     //show and hide menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,13 +40,10 @@ class NewTask : AppCompatActivity() {
             startActivity(int)
         }
         if (id == R.id.save) {
-            val taskManager = TaskManager()
-            taskManager.addTasks(this, titleTv, descriptionMl)
-
+            val taskManager = TaskManager(this)
+            taskManager.addTasks(titleTv, descriptionMl)
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }
 

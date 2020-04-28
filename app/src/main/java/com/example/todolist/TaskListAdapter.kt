@@ -16,6 +16,7 @@ class TaskListAdapter(var mCtx: Context, var resource: Int, var items: MutableLi
         val view: View = layoutInflater.inflate(resource, null)
         var tv1: TextView = view.findViewById(R.id.title)
         var tv2: TextView = view.findViewById(R.id.description)
+
         var iTems = items[position]
         tv1.text = iTems.title
         tv2.text = iTems.desc
