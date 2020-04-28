@@ -1,4 +1,4 @@
-package com.example.spinerproject
+package com.example.todolist
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

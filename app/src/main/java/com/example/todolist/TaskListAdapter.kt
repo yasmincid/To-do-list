@@ -1,4 +1,4 @@
-package com.example.spinerproject
+package com.example.todolist
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import model.Task
+import com.example.todolist.model.Task
 
 class TaskListAdapter(var mCtx: Context, var resource: Int, var items: MutableList<Task>) :
     ArrayAdapter<Task>(mCtx, resource, items) {

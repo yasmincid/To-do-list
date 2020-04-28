@@ -6,23 +6,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        tools:context=".MainActivity" android:id="@+id/flottingAdd">
+        tools:context="com.example.todolist.MainActivity" android:id="@+id/flottingAdd">
     <TextView
             android:text="@string/tview1"
             android:layout_width="171dp"
             android:layout_height="31dp"
             android:textColor="#0A0A0A"
-            android:id="@+id/tv1" android:layout_marginStart="122dp" app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/tvIntroduceDates" android:layout_marginStart="122dp" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" app:layout_constraintTop_toTopOf="parent"
-            android:textSize="24sp" android:layout_marginBottom="27dp" app:layout_constraintBottom_toTopOf="@+id/lv1"
-            android:textStyle="bold" android:layout_above="@+id/lv1"
+            android:textSize="24sp" android:layout_marginBottom="27dp" app:layout_constraintBottom_toTopOf="@+id/lvTask"
+            android:textStyle="bold" android:layout_above="@+id/lvTask"
             android:layout_alignParentStart="true" android:layout_marginTop="23dp"
             android:layout_alignParentTop="true" app:layout_constraintVertical_bias="1.0"/>
     <ListView
             android:layout_width="322dp"
             android:layout_height="514dp"
-            android:id="@+id/lv1" android:layout_marginBottom="66dp" app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/lvTask" android:layout_marginBottom="66dp" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="29dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="30dp"

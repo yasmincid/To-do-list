@@ -1,4 +1,4 @@
-package com.example.spinerproject
+package com.example.todolist
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
